@@ -8,4 +8,7 @@ gsettings set org.mate.background picture-filename '/usr/share/backgrounds/hackt
 
 echo "set -g mouse on" > ~/.tmux.conf
 
+curl https://raw.githubusercontent.com/tastenov/htb/main/prompt | tee -a ~/.bashrc
+source ~/.bashrc
+
 mate-terminal
