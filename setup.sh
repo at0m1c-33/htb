@@ -6,6 +6,6 @@ dconf write /org/mate/terminal/profiles/default/background-type "'solid'"
 gsettings set org.mate.terminal.profile:/org/mate/terminal/profiles/default/ foreground-color '#8F8FF0F0A4A4'
 gsettings set org.mate.background picture-filename '/usr/share/backgrounds/hackthebox.jpg'
 
-timedatectl set-timezone Asia/Qyzylorda
-
 echo "set -g mouse on" > ~/.tmux.conf
+mate-terminal
+exit
