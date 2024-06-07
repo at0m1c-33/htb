@@ -10,5 +10,3 @@ echo "set -g mouse on" > ~/.tmux.conf
 
 curl https://raw.githubusercontent.com/tastenov/htb/main/prompt | tee -a ~/.bashrc
 source ~/.bashrc
-
-mate-terminal
