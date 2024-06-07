@@ -7,5 +7,5 @@ gsettings set org.mate.terminal.profile:/org/mate/terminal/profiles/default/ for
 gsettings set org.mate.background picture-filename '/usr/share/backgrounds/hackthebox.jpg'
 
 echo "set -g mouse on" > ~/.tmux.conf
-mate-terminal
 exit
+mate-terminal
