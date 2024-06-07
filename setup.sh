@@ -8,7 +8,4 @@ gsettings set org.mate.background picture-filename '/usr/share/backgrounds/hackt
 
 echo "set -g mouse on" > ~/.tmux.conf
 
-echo "PROMPT_COMMAND='PS1_CMD1=$(ip route get 10.10.14.1 | awk -F"src " '"'"'NR == 1{ split($2, a," ");print a[1]}'"'"')'; PS1='\n\[\e[38;5;32m\]┌─\[\e[38;5;33m\][\[\e[38;5;75m\]\u\[\e[38;5;221m\]@\[\e[0m\]${PS1_CMD1}\[\e[38;5;33m\]]\[\e[38;5;32m\]-\[\e[38;5;33m\][\[\e[0m\]\w\[\e[38;5;33m\]]\n\[\e[38;5;32m\]└──╼\[\e[38;5;32m\] \[\e[38;5;215m\]\$\[\e[0m\] '"  >> ~/.bashrc
-source .bashrc
-
 mate-terminal
