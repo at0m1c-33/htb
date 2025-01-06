@@ -1,12 +1,9 @@
 #!/bin/bash
 
-gsettings set org.mate.terminal.profile:/org/mate/terminal/profiles/default/ palette '#2E2E34343636:#6262A0A0EAEA:#FFFFFFFFFFFF:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8F8FF0F0A4A4:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC'
+echo -e "set -g mouse on\nset -g history-limit 10000\nset -g default-command /bin/bash" >> ~/.tmux.conf
 
-gsettings set org.mate.terminal.profile:/org/mate/terminal/profiles/default/ background-type 'solid'
-gsettings set org.mate.terminal.profile:/org/mate/terminal/profiles/default/ foreground-color '#8F8FF0F0A4A4'
-gsettings set org.mate.background picture-filename '/usr/share/backgrounds/hackthebox.jpg'
+sudo apt-get update && sudo apt-get install -y alacritty tree
+mkdir -p ~/.config/alacritty && echo -e 'colors:\n  primary:\n    background: "#141D2B"' > ~/.config/alacritty/alacritty.yml
 
-echo "set -g mouse on" > ~/.tmux.conf
-
-curl https://raw.githubusercontent.com/tastenov/htb/main/prompt | tee -a ~/.bashrc
+sed -i '/case "\$TERM" in/{n;s/xterm\*|rxvt\*/xterm*|rxvt*|tmux*|alacritty*/}' ~/.bashrc
 source ~/.bashrc
