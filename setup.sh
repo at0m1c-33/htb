@@ -7,3 +7,5 @@ mkdir -p ~/.config/alacritty && echo -e 'colors:\n  primary:\n    background: "#
 
 sed -i '/case "\$TERM" in/{n;s/xterm\*|rxvt\*/xterm*|rxvt*|tmux*|alacritty*/}' ~/.bashrc
 source ~/.bashrc
+
+echo -e '#!/usr/bin/env xdg-open\n[Desktop Entry]\nType=Application\nTryExec=alacritty\nExec=alacritty\nIcon=Alacritty\nTerminal=false\nCategories=System;TerminalEmulator;\nName=Alacritty\nGenericName=Terminal\nComment=A fast, cross-platform, OpenGL terminal emulator\nStartupWMClass=Alacritty\nActions=New;\n\n[Desktop Action New]\nName=New Terminal\nExec=alacritty' > ~/Desktop/alacritty.desktop && chmod +x ~/Desktop/alacritty.desktop
