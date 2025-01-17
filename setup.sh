@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Tmux Setup Mouse Support, History Limit and Disable Startup Prompt
-echo -e "set -g mouse on\nset -g history-limit 10000\nset -g default-command /bin/bash" >> ~/.tmux.conf
+# Tmux Setup Mouse Support, History Limit, Disable Startup Prompt, Always start at home directory
+echo -e "set -g mouse on\nset -g history-limit 10000\nset -g default-command /bin/bash\nbind c new-window -c ~\nbind % split-window -h -c ~\nbind '"' split-window -v -c ~" >> ~/.tmux.conf
 
 # Tmux Bash Completition
 curl -fSsL "https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux" > ~/.bash.tmux-bash-completion
