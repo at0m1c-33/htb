@@ -1,31 +1,61 @@
 #!/bin/bash
 
-# Tmux Setup: Mouse support, history limit, disable startup prompt, always start at home directory
-echo -e 'set -g mouse on
+########################################
+# 1) Append to ~/.tmux.conf
+########################################
+cat << 'EOF' >> ~/.tmux.conf
+set -g mouse on
 set -g history-limit 10000
 set -g default-command /bin/bash
 bind c new-window -c ~
 bind % split-window -h -c ~
-bind "\"" split-window -v -c ~' >> ~/.tmux.conf
+bind "\"" split-window -v -c ~
+EOF
 
-# Tmux Bash Completion
-curl -fSsL "https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux" \
+########################################
+# 2) Tmux Bash Completion
+########################################
+curl -fSsL \
+  "https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux" \
   > ~/.bash.tmux-bash-completion
+
 echo 'source ~/.bash.tmux-bash-completion' >> ~/.bashrc
 
-# Install Alacritty and tree, set Alacritty background
+########################################
+# 3) Install Alacritty and tree
+########################################
 sudo apt-get update && sudo apt-get install -y alacritty tree
+
+########################################
+# 4) Create Alacritty config
+########################################
 mkdir -p ~/.config/alacritty
-echo -e 'colors:\n  primary:\n    background: "#141D2B"' > ~/.config/alacritty/alacritty.yml
+cat << 'EOF' > ~/.config/alacritty/alacritty.yml
+colors:
+  primary:
+    background: "#141D2B"
+EOF
 
-# Modify $TERM for tmux and Alacritty
-sed -i '/case "\$TERM" in/{n;s/xterm\*|rxvt\*/xterm\*|rxvt\*|tmux\*|alacritty\*/}' ~/.bashrc
+########################################
+# 5) Add tmux and Alacritty to $TERM
+#    in ~/.bashrc (this line finds
+#    the next line after 'case $TERM in'
+#    and replaces xterm*|rxvt* with
+#    xterm*|rxvt*|tmux*|alacritty*
+########################################
+sed -i '/case \$TERM in/{n;s/xterm\*|rxvt\*/xterm\*|rxvt\*|tmux\*|alacritty\*/}' ~/.bashrc
 
-# Reload bashrc (affects only *this* shell while script runs)
+########################################
+# 6) Source ~/.bashrc
+#    (affects only this subshell)
+########################################
 source ~/.bashrc
 
-# Create Alacritty Desktop shortcut
-echo -e '#!/usr/bin/env xdg-open
+########################################
+# 7) Create Alacritty Desktop shortcut
+########################################
+cat << 'EOF' > ~/Desktop/alacritty.desktop
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Type=Application
 TryExec=alacritty
@@ -41,7 +71,9 @@ Actions=New;
 
 [Desktop Action New]
 Name=New Terminal
-Exec=alacritty --option window.startup_mode=Maximized' \
-> ~/Desktop/alacritty.desktop
+Exec=alacritty --option window.startup_mode=Maximized
+EOF
 
 chmod +x ~/Desktop/alacritty.desktop
+
+echo "All done!"
