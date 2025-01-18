@@ -5,9 +5,6 @@ cat <<EOF >> ~/.tmux.conf
 set -g mouse on
 set -g history-limit 10000
 set -g default-command /bin/bash
-bind c new-window -c ~
-bind % split-window -h -c ~
-bind '"' split-window -v -c ~
 EOF
 
 # Tmux Bash Completition
@@ -20,6 +17,9 @@ mkdir -p ~/.config/alacritty && echo -e 'colors:\n  primary:\n    background: "#
 
 # Add tmux and Alacritty to $TERM variable for persistent prompt
 sed -i '/case "\$TERM" in/{n;s/xterm\*|rxvt\*/xterm*|rxvt*|tmux*|alacritty*/}' ~/.bashrc
+
+# Always start in ~
+echo 'cd ~' >> ~/.bashrc
 source ~/.bashrc
 
 # Create Alacritty Shortcut on the Desktop with Always Maximized Window mode
